@@ -3,247 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRANKLIN GOLD PRIME | Mixologia de Elite</title>
+    <title>Jogo das Bolinhas Infinitas</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700&display=swap');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            line-height: 1.6;
-        }
-
-        /* Relógio no Topo */
-        #relogio-container {
-            background-color: #000;
-            color: #d4af37;
-            text-align: center;
-            padding: 5px 0;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        header {
-            background-color: #b30000;
+        body { margin: 0; overflow: hidden; background: #1a1a1a; font-family: sans-serif; }
+        canvas { display: block; }
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             color: white;
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 5px solid #d4af37;
+            pointer-events: none;
+            user-select: none;
         }
-
-        .logo-area h1 {
-            font-weight: 100;
-            font-size: 2.2rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        .logo-area h1 b {
-            font-weight: 700;
-            color: #d4af37;
-        }
-
-        .marcas-bar {
-            background: #222;
-            padding: 12px 0;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .marca {
-            color: #ccc;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            color: #b30000;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin: 35px 0 15px;
-            font-weight: 700;
-            border-left: 5px solid #d4af37;
-            padding-left: 15px;
-        }
-
-        .drink-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .drink-nome {
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            color: #111;
-            display: block;
-        }
-
-        .drink-detalhes {
-            font-size: 0.85rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        .servico-info {
-            font-size: 0.75rem;
-            color: #b30000;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: block;
-            margin-top: 3px;
-        }
-
-        .drink-preco {
-            font-weight: 700;
-            color: #b30000;
-            font-size: 1.2rem;
-            margin-left: 20px;
-            white-space: nowrap;
-        }
-
-        footer {
-            background: #000;
-            color: #d4af37;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 600px) {
-            .drink-item { flex-direction: column; align-items: flex-start; }
-            .drink-preco { margin-left: 0; margin-top: 5px; }
-            .logo-area h1 { font-size: 1.5rem; letter-spacing: 4px; }
+        #btn-finalizar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div id="relogio-container">
-    BRASÍLIA: <span id="relogio">00:00:00</span>
-</div>
-
-<header>
-    <div class="logo-area">
-        <h1>FRANKLIN <b>GOLD PRIME</b></h1>
+    <div id="ui">
+        <h1>Pontos: <span id="score">0</span></h1>
+        <p>Clique nas bolinhas!</p>
     </div>
-</header>
+    <button id="btn-finalizar" onclick="finalizar Jogo()">Finalizar Jogo</button>
 
-<div class="marcas-bar">
-    <span class="marca">Blue Label</span>
-    <span class="marca">The Macallan</span>
-    <span class="marca">Tanqueray No. Ten</span>
-    <span class="marca">Jack Daniel's</span>
-    <span class="marca">Royal Salute</span>
-</div>
+    <canvas id="gameCanvas"></canvas>
 
-<div class="container">
-    
-    <h2 class="section-title">Assinatura Franklin Gold</h2>
-    
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Franklin's Golden Sour</span>
-            <span class="drink-detalhes">Whisky Chivas 18, mel, limão siciliano e pó de ouro 24k.</span>
-            <span class="servico-info">Serviço: Taça de Cristal Coupe</span>
-        </div>
-        <span class="drink-preco">R$ 58,00</span>
-    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Prime Cerrado Martini</span>
-            <span class="drink-detalhes">Vodka Cîroc infusionada com Cajamanga fresca e vermute.</span>
-            <span class="servico-info">Serviço: Taça Martini Premium</span>
-        </div>
-        <span class="drink-preco">R$ 45,00</span>
-    </div>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    <h2 class="section-title">Clássicos de Goiânia</h2>
+        let score = 0;
+        let balls = [];
+        let gameActive = true;
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Moscow Mule Gold</span>
-            <span class="drink-detalhes">Vodka, limão e espuma de gengibre densa artesanal.</span>
-            <span class="servico-info">Serviço: Caneca de Cobre Térmica</span>
-        </div>
-        <span class="drink-preco">R$ 38,00</span>
-    </div>
+        class Ball {
+            constructor() {
+                this.radius = Math.random() * 20 + 15;
+                this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
+                this.y = -this.radius;
+                this.speed = Math.random() * 3 + 2;
+                this.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+            }
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Gin Tônica Marista Tropical</span>
-            <span class="drink-detalhes">Gin Tanqueray, Red Bull Tropical, laranja e alecrim.</span>
-            <span class="servico-info">Serviço: Taça de Gin Cristal (600ml)</span>
-        </div>
-        <span class="drink-preco">R$ 42,00</span>
-    </div>
+            update() {
+                this.y += this.speed;
+            }
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Caipirinha Jabuticaba Elite</span>
-            <span class="drink-detalhes">Cachaça envelhecida e jabuticabas do interior de Goiás.</span>
-            <span class="servico-info">Serviço: Copo Americano de Vidro</span>
-        </div>
-        <span class="drink-preco">R$ 28,00</span>
-    </div>
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Negroni Franklin Reserve</span>
-            <span class="drink-detalhes">Gin, Campari, Vermute e defumação com madeira de carvalho.</span>
-            <span class="servico-info">Serviço: Copo Baixo Vidro Italiano</span>
-        </div>
-        <span class="drink-preco">R$ 40,00</span>
-    </div>
+        function spawnBall() {
+            if (gameActive) {
+                balls.push(new Ball());
+                setTimeout(spawnBall, 600); // Cria uma nova bola a cada 0.6 segundos
+            }
+        }
 
-    <div class="drink-item">
-        <div>
-            <span class="drink-nome">Rabo de Galo Premium</span>
-            <span class="drink-detalhes">Cachaça artesanal, Vermute Rosso e Cynar.</span>
-            <span class="servico-info">Serviço: Copo Americano Clássico</span>
-        </div>
-        <span class="drink-preco">R$ 30,00</span>
-    </div>
+        function update() {
+            if (!gameActive) return;
 
-</div>
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-<footer>
-    FRANKLIN GOLD PRIME &bull; MIXOLOGIA DE ALTO PADRÃO &bull; GOIÂNIA-GO
-</footer>
+            for (let i = 0; i < balls.length; i++) {
+                balls[i].update();
+                balls[i].draw();
 
-<script>
-    function atualizarRelogio() {
-        const agora = new Date();
-        const opcoes = { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        const horaBrasilia = agora.toLocaleTimeString('pt-BR', opcoes);
-        document.getElementById('relogio').textContent = horaBrasilia;
-    }
-    
-    setInterval(atualizarRelogio, 1000);
-    atualizarRelogio();
-</script>
+                // Remove bolas que saíram da tela para não pesar o PC
+                if (balls[i].y - balls[i].radius > canvas.height) {
+                    balls.splice(i, 1);
+                    i--;
+                }
+            }
 
+            requestAnimationFrame(update);
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (!gameActive) return;
+
+            for (let i = 0; i < balls.length; i++) {
+                const b = balls[i];
+                const dist = Math.hypot(e.clientX - b.x, e.clientY - b.y);
+
+                if (dist < b.radius) {
+                    score++;
+                    scoreElement.innerText = score;
+                    balls.splice(i, 1);
+                    break; 
+                }
+            }
+        });
+
+        function finalizarJogo() {
+            gameActive = false;
+            alert("Jogo Finalizado!\nSua pontuação total foi: " + score);
+            location.reload(); // Recarrega para começar de novo
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        spawnBall();
+        update();
+    </script>
 </body>
 </html>
