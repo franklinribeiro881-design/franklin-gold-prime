@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRANKLIN GOLD PRIME | Mixologia de Elite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700&display=swap');
+
+        /* Reset básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header Premium */
+        header {
+            background-color: #b30000; /* Vermelho vibrante */
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 5px solid #d4af37; /* Linha de Ouro */
+        }
+
+        .logo-area h1 {
+            font-weight: 100; /* Efeito Slim */
+            font-size: 2.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .logo-area h1 b {
+            font-weight: 700;
+            color: #d4af37; /* Cor Ouro */
+        }
+
+        /* Faixa de Marcas de Whisky */
+        .marcas-bar {
+            background: #000;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .marca {
+            color: #d4af37;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* Menu de Drinks */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .menu-title {
+            text-align: center;
+            color: #b30000;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .drink-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 35px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .drink-detalhes {
+            flex: 1;
+        }
+
+        .drink-nome {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: #111;
+            display: block;
+        }
+
+        .drink-ingredientes {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .drink-preco {
+            font-weight: 700;
+            color: #b30000;
+            font-size: 1.3rem;
+            margin-left: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #f9f9f9;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            color: #999;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Responsividade para telemóveis */
+        @media (max-width: 600px) {
+            .logo-area h1 { font-size: 1.5rem; letter-spacing: 4px; }
+            .drink-item { flex-direction: column; align-items: flex-start; }
+            .drink-preco { margin-left: 0; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-area">
+        <h1>FRANKLIN <b>GOLD PRIME</b></h1>
+    </div>
+</header>
+
+<div class="marcas-bar">
+    <span class="marca">Johnnie Walker Blue Label</span>
+    <span class="marca">The Macallan</span>
+    <span class="marca">Chivas Regal 25</span>
+    <span class="marca">Jack Daniel's Single Barrel</span>
+    <span class="marca">Royal Salute</span>
+</div>
+
+<div class="container">
+    <h2 class="menu-title">Cardápio Exclusive - Goiânia</h2>
+
+    <div class="drink-item">
+        <div class="drink-detalhes">
+            <span class="drink-nome">Gold Prime Gin Tonic</span>
+            <span class="drink-ingredientes">Gin Tanqueray Ten, zimbro, fatias de limão siciliano e especiarias secretas.</span>
+        </div>
+        <span class="drink-preco">R$ 48,00</span>
+    </div>
+
+    <div class="drink-item">
+        <div class="drink-detalhes">
+            <span class="drink-nome">Negroni Franklin Special</span>
+            <span class="drink-desc">Gin London Dry, Campari, Vermute Rosso e um toque de fumo de canela.</span>
+        </div>
+        <span class="drink-preco">R$ 42,00</span>
+    </div>
+
+    <div class="drink-item">
+        <div class="drink-detalhes">
+            <span class="drink-nome">Moscow Mule de Elite</span>
+            <span class="drink-ingredientes">Vodka Premium, sumo de limão tahiti e espuma artesanal de gengibre Gold.</span>
+        </div>
+        <span class="drink-preco">R$ 39,00</span>
+    </div>
+
+    <div class="drink-item">
+        <div class="drink-detalhes">
+            <span class="drink-nome">Whisky Sour 18 Anos</span>
+            <span class="drink-ingredientes">Whisky Chivas 18, sumo de limão fresco e clara de ovo pasteurizada.</span>
+        </div>
+        <span class="drink-preco">R$ 55,00</span>
+    </div>
+
+    <div class="drink-item">
+        <div class="drink-detalhes">
+            <span class="drink-nome">Cerrado Gold Fusion</span>
+            <span class="drink-ingredientes">Cachaça de alambique, redução de lichia e perfume de manjericão.</span>
+        </div>
+        <span class="drink-preco">R$ 35,00</span>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 FRANKLIN GOLD PRIME - Mixologia & Eventos de Luxo em Goiânia
+</footer>
+
+</body>
+</html>
